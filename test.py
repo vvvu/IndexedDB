@@ -43,7 +43,7 @@ def test_extendible():
     tb = query('student')  # 指定查询student表
     tb.indexing_extendible_hash()  # 针对student表建立索引
 
-    extendible_result = tb.search('id', '3', extendible_serach)
+    extendible_result = tb.search('id', '3', extendible_search)
     normal_query_result = tb.search('id', '3', equal)  # 查询 >= 15岁的人
 
     # output

@@ -67,7 +67,7 @@ def linear_search(self, attr, pk):
     pass
 
 
-def extendible_serach(self, attr, pk):
+def extendible_search(self, attr, pk):
     assert self.index_available == True, "No available extendible index"
     indexs = []
     idx = self.index_table.get(pk)
