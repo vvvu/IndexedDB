@@ -5,7 +5,6 @@ from extendible_hash import *
 
 
 class query():
-    __index__ = ['Linear Search', 'Linear Hash', 'Extendible Hash']
 
     def __init__(self, table_name):
         '''
