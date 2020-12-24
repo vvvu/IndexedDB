@@ -13,7 +13,7 @@ class query():
         '''
         self.table = TB[table_name]
         self.index_table = None  # index table
-        self.index_available = False # 是否可用index
+        self.index_available = False  # 是否可用index
 
     def search(self, attr, value, cond_func):
         '''
@@ -51,18 +51,28 @@ class query():
                     if index > head:
                         break
 
-    def extendible_hash(self): # 建立extendible_hash index
+    def indexing_linear_hash(self):
+        pass
+        # self.index_table = LinearHash()
+        # for index, row in enumerate(self.table):
+        #     pk = self.table[index].__values__[0] # primary key = id <=> first element
+        #     self.index_table.put(pk, row.__values__) # <id,row>
+        # self.index_available = True
+
+    def indexing_extendible_hash(self):  # 建立extendible_hash索引
         self.index_table = ExtendibleMap()
         for index, row in enumerate(self.table):
-            pk = self.table[index].__values__[0]  # primary key = id => 第一个元素
-            self.index_table.put(pk, row.__values__)  # <id, row>
+            pk = self.table[index].__values__[0]  # primary key = id <=> first element
+            self.index_table.put(pk, row)  # <id, row>
         self.index_available = True
 
-    def extendible_search(self, attr, pk):
-        index = []
-        ix = self.index_table.get(pk)  # id
-        index.append(ix)
-        return index
+    def indexing_bplus_tree_index(self):
+        pass
+        # self.index_table = bplus_tree()
+        # for index, row in enumerate(self.table):
+        #     pk = self.table[index].__values__[0]  # primary key = id <=> first element
+        #     self.index_table.put(pk, row.__values__)  # <id,row>
+        # self.index_available = True
 
 
 def create_row(name, attr):  # 表名，attr是一个dict，对应{attr, value}
@@ -96,31 +106,4 @@ PK = {}  # {table_name, primary_key}
 if __name__ == '__main__':
     # test1()
     # test2()
-
-    def test_extendible():
-        attr = ['id', 'name', 'sex', 'major', 'age', 'birthday', 'contact', 'credit']  # student 的属性
-        fp = 'student.txt'
-        with open(fp, 'r', encoding='utf-8') as file:
-            for line in file.readlines():
-                line = line.strip().split('\t')
-                d = {attr[i]: line[i] for i in range(0, len(attr))}  # 字典：映射属性和属性值
-                create_row('student', d)  # 在student表中加入对应项
-
-        q = query('student') # 查询student表
-        q.extendible_hash() # 针对student表建立索引
-
-        import time
-        st = time.time()
-        l = q.extendible_search('id', '3')
-        # print(l)
-        ed = time.time()
-        print("extendible_hashing", ed - st)
-
-        st = time.time()
-        query_result = q.search('id', '3', equal)  # 查询 >= 15岁的人
-        # q.print(query_result)  # 输出结果表中前10项
-        ed = time.time()
-        print("normal search", ed - st)
-
-
     test_extendible()

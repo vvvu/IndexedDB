@@ -1,3 +1,5 @@
+# normal conditional query
+
 def equal(self, attr, value):
     query_table = []  # 查询结果
     for index, row in enumerate(self.table):  # 顺序查找
@@ -53,3 +55,23 @@ def between_and(self, attr, value: tuple):
         if str(lb) < str(row.__dict__[attr]) < str(ub):
             query_table.append(row)
     return query_table
+
+
+# indexing search
+
+def linear_search(self, attr, pk):
+    assert self.index_available == True, "No available linear index"
+    pass
+
+
+def extendible_serach(self, attr, pk):
+    assert self.index_available == True, "No available extendible index"
+    indexs = []
+    idx = self.index_table.get(pk)
+    indexs.append(idx)
+    return indexs
+
+
+def bplus_search(self, attr, pk):
+    assert self.index_available == True, "No available bplus index"
+    pass
