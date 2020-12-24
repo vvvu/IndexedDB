@@ -1,7 +1,7 @@
 from conditional_query import *
 from utils import *
 from test import *
-from ehdb import *
+from extendible_hash import *
 
 
 class query():
@@ -56,14 +56,14 @@ class query():
         # self.index_table = LinearHash()
         # for index, row in enumerate(self.table):
         #     pk = self.table[index].__values__[0] # primary key = id <=> first element
-        #     self.index_table.put(pk, row.__values__) # <id,row>
+        #     self.index_table.insert(pk, row.__values__) # <id,row>
         # self.index_available = True
 
     def indexing_extendible_hash(self):  # 建立extendible_hash索引
-        self.index_table = ExtendibleMap()
+        self.index_table = extendible_hash()
         for index, row in enumerate(self.table):
             pk = self.table[index].__values__[0]  # primary key = id <=> first element
-            self.index_table.put(pk, row)  # <id, row>
+            self.index_table.insert(pk, row)  # <id, row>
         self.index_available = True
 
     def indexing_bplus_tree_index(self):
@@ -71,7 +71,7 @@ class query():
         # self.index_table = bplus_tree()
         # for index, row in enumerate(self.table):
         #     pk = self.table[index].__values__[0]  # primary key = id <=> first element
-        #     self.index_table.put(pk, row.__values__)  # <id,row>
+        #     self.index_table.insert(pk, row.__values__)  # <id,row>
         # self.index_available = True
 
 
@@ -88,7 +88,7 @@ def create_row(name, attr):  # 表名，attr是一个dict，对应{attr, value}
     for key, value in attr.items():
         dic[key] = value
 
-    cls = type(name, (object,), dic)  # class，这里就是指声明一个具体的学生
+    cls = type(name, (object,), dic)  # class，这里就是指声明一个具体的student
 
     for key, value in attr.items():
         cls.__attrs__.append(key)

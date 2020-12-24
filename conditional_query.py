@@ -1,4 +1,7 @@
-# normal conditional query
+'''
+Normal conditional query
+'''
+
 
 def equal(self, attr, value):
     query_table = []  # 查询结果
@@ -57,7 +60,7 @@ def between_and(self, attr, value: tuple):
     return query_table
 
 
-# indexing search
+# Indexing search
 
 def linear_search(self, attr, pk):
     assert self.index_available == True, "No available linear index"
