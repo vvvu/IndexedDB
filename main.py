@@ -105,4 +105,5 @@ PK = {}  # {table_name, primary_key}
 if __name__ == '__main__':
     # test1()
     # test2()
-    test_extendible()
+    # test_extendible()
+    test_load_data()
