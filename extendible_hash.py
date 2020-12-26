@@ -19,7 +19,14 @@ class extendible_hash:
 
     def __init__(self):
         self.global_depth = 1
-        self.bucket_size = 2  # bucket_max_size
+        self.bucket_size = 50  # bucket_max_size
+        '''
+        [Very Important]
+        Bucket_max_size will affect the efficiency of extendible
+        because it will directly affect the frequency of split
+        According to some related paper, we choose to assign 50 to bucket_size
+        and finally get good performance
+        '''
         self.size = 0
         num_buckets = pow(2, self.global_depth)
         self.dictionaries = [self.Bucket() for i in range(num_buckets)]
